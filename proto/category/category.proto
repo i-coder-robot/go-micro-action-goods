@@ -11,9 +11,9 @@ service Categories {
     }
     rpc Update (Request) returns (Response) {
     }
-    rpc GetCategoryById (Request) returns (Response) {
-    }
     rpc Delete (Request) returns (Response) {
+    }
+    rpc GetCategoryById (Request) returns (Response) {
     }
     rpc GetCategories4Search (Request) returns (Response) {
     }

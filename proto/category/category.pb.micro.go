@@ -46,8 +46,8 @@ type CategoriesService interface {
 	Exist(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	Save(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	Update(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	GetCategories4Search(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
@@ -103,8 +103,8 @@ func (c *categoriesService) Update(ctx context.Context, in *Request, opts ...cli
 	return out, nil
 }
 
-func (c *categoriesService) GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.GetCategoryById", in)
+func (c *categoriesService) Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.Delete", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -113,8 +113,8 @@ func (c *categoriesService) GetCategoryById(ctx context.Context, in *Request, op
 	return out, nil
 }
 
-func (c *categoriesService) Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.Delete", in)
+func (c *categoriesService) GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.GetCategoryById", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -140,8 +140,8 @@ type CategoriesHandler interface {
 	Exist(context.Context, *Request, *Response) error
 	Save(context.Context, *Request, *Response) error
 	Update(context.Context, *Request, *Response) error
-	GetCategoryById(context.Context, *Request, *Response) error
 	Delete(context.Context, *Request, *Response) error
+	GetCategoryById(context.Context, *Request, *Response) error
 	GetCategories4Search(context.Context, *Request, *Response) error
 }
 
@@ -151,8 +151,8 @@ func RegisterCategoriesHandler(s server.Server, hdlr CategoriesHandler, opts ...
 		Exist(ctx context.Context, in *Request, out *Response) error
 		Save(ctx context.Context, in *Request, out *Response) error
 		Update(ctx context.Context, in *Request, out *Response) error
-		GetCategoryById(ctx context.Context, in *Request, out *Response) error
 		Delete(ctx context.Context, in *Request, out *Response) error
+		GetCategoryById(ctx context.Context, in *Request, out *Response) error
 		GetCategories4Search(ctx context.Context, in *Request, out *Response) error
 	}
 	type Categories struct {
@@ -182,12 +182,12 @@ func (h *categoriesHandler) Update(ctx context.Context, in *Request, out *Respon
 	return h.CategoriesHandler.Update(ctx, in, out)
 }
 
-func (h *categoriesHandler) GetCategoryById(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.GetCategoryById(ctx, in, out)
-}
-
 func (h *categoriesHandler) Delete(ctx context.Context, in *Request, out *Response) error {
 	return h.CategoriesHandler.Delete(ctx, in, out)
+}
+
+func (h *categoriesHandler) GetCategoryById(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.GetCategoryById(ctx, in, out)
 }
 
 func (h *categoriesHandler) GetCategories4Search(ctx context.Context, in *Request, out *Response) error {

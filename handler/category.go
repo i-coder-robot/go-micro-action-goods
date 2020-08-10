@@ -43,11 +43,6 @@ func (c *Category) Update(ctx context.Context, req *pb.Request, res *pb.Response
 	return nil
 }
 
-func (c *Category) GetCategoryById(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
-	res.Category = c.Repo.GetCategoryById(req.ListQuery)
-	return nil
-}
-
 func (c *Category) Delete(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
 	b, e := c.Repo.Delete(req.Category)
 	if e != nil {
@@ -57,11 +52,10 @@ func (c *Category) Delete(ctx context.Context, req *pb.Request, res *pb.Response
 	return nil
 }
 
-//func (c *Category) SelectByLevelAndParentIdsAndNumber(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
-//	categories := c.Repo.SelectByLevelAndParentIdsAndNumber(req.ListQuery)
-//	res.Categories=categories
-//	return nil
-//}
+func (c *Category) GetCategoryById(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
+	res.Category = c.Repo.GetCategoryById(req.Category)
+	return nil
+}
 
 func (c *Category) GetCategories4Search(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
 	r, e := c.Repo.GetCategories4Search(req.Category)
@@ -71,3 +65,9 @@ func (c *Category) GetCategories4Search(ctx context.Context, req *pb.Request, re
 	res.Categories=r
 	return nil
 }
+
+//func (c *Category) SelectByLevelAndParentIdsAndNumber(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
+//	categories := c.Repo.SelectByLevelAndParentIdsAndNumber(req.ListQuery)
+//	res.Categories=categories
+//	return nil
+//}

@@ -12,8 +12,8 @@ type Category interface {
 	Exist(user *pb.Category) bool
 	Save(category *pb.Category) (*pb.Category, error)
 	Update(category *pb.Category) (bool, error)
-	GetCategoryById(query *pb.ListQuery) (*pb.Category)
 	Delete(category *pb.Category) (bool,error)
+	GetCategoryById(query *pb.Category) (*pb.Category)
 	GetCategories4Search (category *pb.Category) ([]*pb.Category,error)
 	//SelectByLevelAndParentIdsAndNumber(query *pb.ListQuery) (categories []*pb.Category)
 }
@@ -72,11 +72,6 @@ func (repo *CategoryRepository) Update(category *pb.Category) (bool, error){
 	return true, nil
 }
 
-func (repo *CategoryRepository) GetCategoryById(category *pb.Category) (c *pb.Category){
-	repo.DB.Where([]string{category.CategoryId}).Find(&c)
-	return c
-}
-
 func (repo *CategoryRepository) Delete(category *pb.Category) (bool, error){
 	c := &pb.Category{CategoryId: category.CategoryId}
 	err := repo.DB.Delete(c).Error
@@ -85,6 +80,11 @@ func (repo *CategoryRepository) Delete(category *pb.Category) (bool, error){
 		return false, err
 	}
 	return true, nil
+}
+
+func (repo *CategoryRepository) GetCategoryById(category *pb.Category) (c *pb.Category){
+	repo.DB.Where([]string{category.CategoryId}).Find(&c)
+	return c
 }
 
 func (repo *CategoryRepository) GetCategories4Search(category *pb.Category) (categories []*pb.Category, err error){
