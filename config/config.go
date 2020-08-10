@@ -7,6 +7,6 @@ import (
 
 // Conf 配置
 var Conf config.Config = config.Config{
-	Name:    env.Getenv("MICRO_API_NAMESPACE", "go.micro.srv.") + "goods",
+	Name:    env.Getenv("MICRO_API_NAMESPACE", "go.micro.srv.") + "product",
 	Version: "latest",
 }

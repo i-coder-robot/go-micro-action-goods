@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package product;
+
+service Products {
+    // 获取商品列表
+    rpc GetProductsByPage (Request) returns (Response) {
+    }
+    // 商品是否存在
+    rpc Exist (Request) returns (Response) {
+    }
+    // 创建商品
+    rpc Create(Request) returns (Response) {}
+    // 更新商品
+    rpc Update(Request) returns (Response) {}
+    // 删除商品
+    rpc Delete(Request) returns (Response) {}
+    // 商品详情
+    rpc Info(Request) returns (Response) {}
+}
+
+message Product {
+    int64 productId=1;
+    string productName=2;
+    string productIntro=3;
+    int64 productCategoryId=4;
+    string productCoverImg=5;
+    string productCarousel=6;
+    double originalPrice=7;
+    double sellingPrice=8;
+    int32 stockNum=9;
+    string tag=10;
+    int32 productSellStatus=11;
+    int64 createUser=12;
+    int64 updateUser=13;
+    string productDetailContent=14;
+    string created_at = 15;
+    string updated_at = 16;
+}
+
+message ListQuery {
+    int64 limit=1;          // 返回数量
+    int64 page=2;           // 页面
+    string sort=3;          // 排序
+    string where = 4;       // 查询条件
+}
+message Request {
+    ListQuery list_query = 1; // 列表分页请求
+    Product product = 2; // 用户
+}
+
+message Response {
+    bool valid = 1;
+    int64 total = 2;
+    Product product = 3;
+    repeated Product products = 4;
+}
