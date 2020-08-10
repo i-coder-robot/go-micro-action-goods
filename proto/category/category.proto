@@ -3,19 +3,19 @@ syntax = "proto3";
 package category;
 
 service Categories {
-    rpc getCategoriesPage (Request) returns (Response) {
+    rpc GetCategoriesPage (Request) returns (Response) {
     }
-    rpc saveCategory (Request) returns (Response) {
+    rpc SaveCategory (Request) returns (Response) {
     }
-    rpc updateGoodsCategory (Request) returns (Response) {
+    rpc UpdateGoodsCategory (Request) returns (Response) {
     }
-    rpc getGoodsCategoryById (Request) returns (Response) {
+    rpc GetGoodsCategoryById (Request) returns (Response) {
     }
-    rpc deleteBatch (Request) returns (Response) {
+    rpc DeleteBatch (Request) returns (Response) {
     }
-    rpc getCategoriesForSearch (Request) returns (Response) {
+    rpc GetCategoriesForSearch (Request) returns (Response) {
     }
-    rpc selectByLevelAndParentIdsAndNumber (Request) returns (Response) {
+    rpc SelectByLevelAndParentIdsAndNumber (Request) returns (Response) {
     }
 }
 
