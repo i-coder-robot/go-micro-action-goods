@@ -5,7 +5,6 @@ import (
 	pb "github.com/i-coder-robot/go-micro-action-goods/proto/category"
 	"github.com/jinzhu/gorm"
 	"github.com/micro/go-micro/v2/util/log"
-	"strings"
 )
 
 type Category interface {
@@ -15,7 +14,8 @@ type Category interface {
 	Update(category *pb.Category) (bool, error)
 	GetCategoryById(query *pb.ListQuery) (*pb.Category)
 	Delete(category *pb.Category) (bool,error)
-	SelectByLevelAndParentIdsAndNumber(query *pb.ListQuery) (categories []*pb.Category)
+	GetCategories4Search (category *pb.Category) ([]*pb.Category,error)
+	//SelectByLevelAndParentIdsAndNumber(query *pb.ListQuery) (categories []*pb.Category)
 }
 
 type CategoryRepository struct {
@@ -87,14 +87,15 @@ func (repo *CategoryRepository) Delete(category *pb.Category) (bool, error){
 	return true, nil
 }
 
-//func (repo *CategoryRepository) GetCategories4Search(query *pb.ListQuery) (*pb.Category, error){
-//
-//}
-
-func (repo *CategoryRepository) SelectByLevelAndParentIdsAndNumber(category *pb.Category) (categories []*pb.Category){
-	ids:= category.CategoryIds
-	idArr:=strings.Split(ids,",")
-	repo.DB.Where("level=",category.CategoryLevel).Where(idArr).Find(&categories)
-	return categories
+func (repo *CategoryRepository) GetCategories4Search(category *pb.Category) (categories []*pb.Category, err error){
+	err=repo.DB.Where("category_name",category.CategoryName).Find(categories).Error
+	return categories,err
 }
+
+//func (repo *CategoryRepository) SelectByLevelAndParentIdsAndNumber(category *pb.Category) (categories []*pb.Category){
+//	ids:= category.CategoryIds
+//	idArr:=strings.Split(ids,",")
+//	repo.DB.Where("level=",category.CategoryLevel).Where(idArr).Find(&categories)
+//	return categories
+//}
 

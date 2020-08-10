@@ -48,9 +48,7 @@ type CategoriesService interface {
 	Update(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 	Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	//    rpc GetCategories4Search (Request) returns (Response) {
-	//    }
-	SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetCategories4Search(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
 type categoriesService struct {
@@ -125,8 +123,8 @@ func (c *categoriesService) Delete(ctx context.Context, in *Request, opts ...cli
 	return out, nil
 }
 
-func (c *categoriesService) SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.SelectByLevelAndParentIdsAndNumber", in)
+func (c *categoriesService) GetCategories4Search(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.GetCategories4Search", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -144,9 +142,7 @@ type CategoriesHandler interface {
 	Update(context.Context, *Request, *Response) error
 	GetCategoryById(context.Context, *Request, *Response) error
 	Delete(context.Context, *Request, *Response) error
-	//    rpc GetCategories4Search (Request) returns (Response) {
-	//    }
-	SelectByLevelAndParentIdsAndNumber(context.Context, *Request, *Response) error
+	GetCategories4Search(context.Context, *Request, *Response) error
 }
 
 func RegisterCategoriesHandler(s server.Server, hdlr CategoriesHandler, opts ...server.HandlerOption) error {
@@ -157,7 +153,7 @@ func RegisterCategoriesHandler(s server.Server, hdlr CategoriesHandler, opts ...
 		Update(ctx context.Context, in *Request, out *Response) error
 		GetCategoryById(ctx context.Context, in *Request, out *Response) error
 		Delete(ctx context.Context, in *Request, out *Response) error
-		SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, out *Response) error
+		GetCategories4Search(ctx context.Context, in *Request, out *Response) error
 	}
 	type Categories struct {
 		categories
@@ -194,6 +190,6 @@ func (h *categoriesHandler) Delete(ctx context.Context, in *Request, out *Respon
 	return h.CategoriesHandler.Delete(ctx, in, out)
 }
 
-func (h *categoriesHandler) SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.SelectByLevelAndParentIdsAndNumber(ctx, in, out)
+func (h *categoriesHandler) GetCategories4Search(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.GetCategories4Search(ctx, in, out)
 }

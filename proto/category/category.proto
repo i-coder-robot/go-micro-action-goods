@@ -15,10 +15,10 @@ service Categories {
     }
     rpc Delete (Request) returns (Response) {
     }
-//    rpc GetCategories4Search (Request) returns (Response) {
-//    }
-    rpc SelectByLevelAndParentIdsAndNumber (Request) returns (Response) {
+    rpc GetCategories4Search (Request) returns (Response) {
     }
+//    rpc SelectByLevelAndParentIdsAndNumber (Request) returns (Response) {
+//    }
 }
 
 message Category {

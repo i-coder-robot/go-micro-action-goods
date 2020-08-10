@@ -57,8 +57,17 @@ func (c *Category) Delete(ctx context.Context, req *pb.Request, res *pb.Response
 	return nil
 }
 
-func (c *Category) SelectByLevelAndParentIdsAndNumber(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
-	categories := c.Repo.SelectByLevelAndParentIdsAndNumber(req.ListQuery)
-	res.Categories=categories
+//func (c *Category) SelectByLevelAndParentIdsAndNumber(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
+//	categories := c.Repo.SelectByLevelAndParentIdsAndNumber(req.ListQuery)
+//	res.Categories=categories
+//	return nil
+//}
+
+func (c *Category) GetCategories4Search(ctx context.Context, req *pb.Request, res *pb.Response) (err error){
+	r, e := c.Repo.GetCategories4Search(req.Category)
+	if e != nil {
+		return e
+	}
+	res.Categories=r
 	return nil
 }
