@@ -42,12 +42,14 @@ func NewCategoriesEndpoints() []*api.Endpoint {
 // Client API for Categories service
 
 type CategoriesService interface {
-	GetCategoriesPage(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	SaveCategory(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	UpdateGoodsCategory(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	GetGoodsCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	DeleteBatch(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	GetCategoriesForSearch(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetCategoryByPage(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Exist(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Save(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	//    rpc GetCategories4Search (Request) returns (Response) {
+	//    }
 	SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
@@ -63,8 +65,8 @@ func NewCategoriesService(name string, c client.Client) CategoriesService {
 	}
 }
 
-func (c *categoriesService) GetCategoriesPage(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.GetCategoriesPage", in)
+func (c *categoriesService) GetCategoryByPage(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.GetCategoryByPage", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -73,8 +75,8 @@ func (c *categoriesService) GetCategoriesPage(ctx context.Context, in *Request, 
 	return out, nil
 }
 
-func (c *categoriesService) SaveCategory(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.SaveCategory", in)
+func (c *categoriesService) Exist(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.Exist", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -83,8 +85,8 @@ func (c *categoriesService) SaveCategory(ctx context.Context, in *Request, opts 
 	return out, nil
 }
 
-func (c *categoriesService) UpdateGoodsCategory(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.UpdateGoodsCategory", in)
+func (c *categoriesService) Save(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.Save", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -93,8 +95,8 @@ func (c *categoriesService) UpdateGoodsCategory(ctx context.Context, in *Request
 	return out, nil
 }
 
-func (c *categoriesService) GetGoodsCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.GetGoodsCategoryById", in)
+func (c *categoriesService) Update(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.Update", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -103,8 +105,8 @@ func (c *categoriesService) GetGoodsCategoryById(ctx context.Context, in *Reques
 	return out, nil
 }
 
-func (c *categoriesService) DeleteBatch(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.DeleteBatch", in)
+func (c *categoriesService) GetCategoryById(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.GetCategoryById", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -113,8 +115,8 @@ func (c *categoriesService) DeleteBatch(ctx context.Context, in *Request, opts .
 	return out, nil
 }
 
-func (c *categoriesService) GetCategoriesForSearch(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Categories.GetCategoriesForSearch", in)
+func (c *categoriesService) Delete(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Categories.Delete", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -136,23 +138,25 @@ func (c *categoriesService) SelectByLevelAndParentIdsAndNumber(ctx context.Conte
 // Server API for Categories service
 
 type CategoriesHandler interface {
-	GetCategoriesPage(context.Context, *Request, *Response) error
-	SaveCategory(context.Context, *Request, *Response) error
-	UpdateGoodsCategory(context.Context, *Request, *Response) error
-	GetGoodsCategoryById(context.Context, *Request, *Response) error
-	DeleteBatch(context.Context, *Request, *Response) error
-	GetCategoriesForSearch(context.Context, *Request, *Response) error
+	GetCategoryByPage(context.Context, *Request, *Response) error
+	Exist(context.Context, *Request, *Response) error
+	Save(context.Context, *Request, *Response) error
+	Update(context.Context, *Request, *Response) error
+	GetCategoryById(context.Context, *Request, *Response) error
+	Delete(context.Context, *Request, *Response) error
+	//    rpc GetCategories4Search (Request) returns (Response) {
+	//    }
 	SelectByLevelAndParentIdsAndNumber(context.Context, *Request, *Response) error
 }
 
 func RegisterCategoriesHandler(s server.Server, hdlr CategoriesHandler, opts ...server.HandlerOption) error {
 	type categories interface {
-		GetCategoriesPage(ctx context.Context, in *Request, out *Response) error
-		SaveCategory(ctx context.Context, in *Request, out *Response) error
-		UpdateGoodsCategory(ctx context.Context, in *Request, out *Response) error
-		GetGoodsCategoryById(ctx context.Context, in *Request, out *Response) error
-		DeleteBatch(ctx context.Context, in *Request, out *Response) error
-		GetCategoriesForSearch(ctx context.Context, in *Request, out *Response) error
+		GetCategoryByPage(ctx context.Context, in *Request, out *Response) error
+		Exist(ctx context.Context, in *Request, out *Response) error
+		Save(ctx context.Context, in *Request, out *Response) error
+		Update(ctx context.Context, in *Request, out *Response) error
+		GetCategoryById(ctx context.Context, in *Request, out *Response) error
+		Delete(ctx context.Context, in *Request, out *Response) error
 		SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, out *Response) error
 	}
 	type Categories struct {
@@ -166,28 +170,28 @@ type categoriesHandler struct {
 	CategoriesHandler
 }
 
-func (h *categoriesHandler) GetCategoriesPage(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.GetCategoriesPage(ctx, in, out)
+func (h *categoriesHandler) GetCategoryByPage(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.GetCategoryByPage(ctx, in, out)
 }
 
-func (h *categoriesHandler) SaveCategory(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.SaveCategory(ctx, in, out)
+func (h *categoriesHandler) Exist(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.Exist(ctx, in, out)
 }
 
-func (h *categoriesHandler) UpdateGoodsCategory(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.UpdateGoodsCategory(ctx, in, out)
+func (h *categoriesHandler) Save(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.Save(ctx, in, out)
 }
 
-func (h *categoriesHandler) GetGoodsCategoryById(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.GetGoodsCategoryById(ctx, in, out)
+func (h *categoriesHandler) Update(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.Update(ctx, in, out)
 }
 
-func (h *categoriesHandler) DeleteBatch(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.DeleteBatch(ctx, in, out)
+func (h *categoriesHandler) GetCategoryById(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.GetCategoryById(ctx, in, out)
 }
 
-func (h *categoriesHandler) GetCategoriesForSearch(ctx context.Context, in *Request, out *Response) error {
-	return h.CategoriesHandler.GetCategoriesForSearch(ctx, in, out)
+func (h *categoriesHandler) Delete(ctx context.Context, in *Request, out *Response) error {
+	return h.CategoriesHandler.Delete(ctx, in, out)
 }
 
 func (h *categoriesHandler) SelectByLevelAndParentIdsAndNumber(ctx context.Context, in *Request, out *Response) error {

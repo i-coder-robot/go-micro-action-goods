@@ -3,18 +3,20 @@ syntax = "proto3";
 package category;
 
 service Categories {
-    rpc GetCategoriesPage (Request) returns (Response) {
+    rpc GetCategoryByPage (Request) returns (Response) {
     }
-    rpc SaveCategory (Request) returns (Response) {
+    rpc Exist (Request) returns (Response) {
     }
-    rpc UpdateGoodsCategory (Request) returns (Response) {
+    rpc Save (Request) returns (Response) {
     }
-    rpc GetGoodsCategoryById (Request) returns (Response) {
+    rpc Update (Request) returns (Response) {
     }
-    rpc DeleteBatch (Request) returns (Response) {
+    rpc GetCategoryById (Request) returns (Response) {
     }
-    rpc GetCategoriesForSearch (Request) returns (Response) {
+    rpc Delete (Request) returns (Response) {
     }
+//    rpc GetCategories4Search (Request) returns (Response) {
+//    }
     rpc SelectByLevelAndParentIdsAndNumber (Request) returns (Response) {
     }
 }
@@ -28,7 +30,7 @@ message Category {
     string is_deleted = 6;
     string created_at = 9;
     string updated_at = 10;
-    string category_ids =11;
+    string category_ids = 11;
 }
 
 message ListQuery {
