@@ -1,4 +1,4 @@
-module github.com/i-coder-robot/go-micro-action-goods.git
+module github.com/i-coder-robot/go-micro-action-goods
 
 go 1.14
 
