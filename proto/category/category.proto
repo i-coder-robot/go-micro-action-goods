@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package category;
+
+service Categories {
+    rpc getCategoriesPage (Request) returns (Response) {
+    }
+    rpc saveCategory (Request) returns (Response) {
+    }
+    rpc updateGoodsCategory (Request) returns (Response) {
+    }
+    rpc getGoodsCategoryById (Request) returns (Response) {
+    }
+    rpc deleteBatch (Request) returns (Response) {
+    }
+    rpc getCategoriesForSearch (Request) returns (Response) {
+    }
+    rpc selectByLevelAndParentIdsAndNumber (Request) returns (Response) {
+    }
+}
+
+message Category {
+    string category_id = 1;
+    string category_level = 2;
+    string parent_id = 3;
+    string category_name = 4;
+    string category_rank = 5;
+    string is_deleted = 6;
+    string created_at = 9;
+    string updated_at = 10;
+    string category_ids =11;
+}
+
+message ListQuery {
+    int64 limit = 1; // 返回数量
+    int64 page = 2; // 页面
+    string sort = 3; // 排序
+    string where = 4; // 查询条件
+}
+
+message Request {
+    ListQuery list_query = 1; // 列表分页请求
+    Category category = 2; // 用户
+}
+
+message Response {
+    bool valid = 1;
+    int64 total = 2;
+    Category category = 3;
+    repeated Category Categories = 4;
+}
