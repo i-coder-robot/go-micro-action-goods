@@ -22,15 +22,16 @@ service Categories {
 }
 
 message Category {
-    string category_id = 1;
-    string category_level = 2;
-    string parent_id = 3;
-    string category_name = 4;
-    string category_rank = 5;
-    string is_deleted = 6;
-    string created_at = 9;
-    string updated_at = 10;
-    string category_ids = 11;
+    int64 id = 1;
+    string category_id = 2;
+    string category_level = 3;
+    string parent_id = 4;
+    string category_name = 5;
+    string category_rank = 6;
+    string is_deleted = 7;
+    string created_at = 8;
+    string updated_at = 9;
+    string category_ids = 10;
 }
 
 message ListQuery {
@@ -49,5 +50,5 @@ message Response {
     bool valid = 1;
     int64 total = 2;
     Category category = 3;
-    repeated Category Categories = 4;
+    repeated Category category_list = 4;
 }

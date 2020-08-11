@@ -15,7 +15,7 @@ func (c *Category) GetCategoryByPage(ctx context.Context, req *pb.Request, res *
 	if e != nil {
 		return e
 	}
-	res.Categories = result
+	res.CategoryList = result
 	return nil
 }
 
@@ -62,7 +62,7 @@ func (c *Category) GetCategories4Search(ctx context.Context, req *pb.Request, re
 	if e != nil {
 		return e
 	}
-	res.Categories=r
+	res.CategoryList=r
 	return nil
 }
 

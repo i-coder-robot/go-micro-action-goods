@@ -3,6 +3,7 @@ syntax = "proto3";
 package product;
 
 service Products {
+
     // 获取商品列表
     rpc GetProductsByPage (Request) returns (Response) {
     }
@@ -20,22 +21,23 @@ service Products {
 }
 
 message Product {
-    int64 productId=1;
-    string productName=2;
-    string productIntro=3;
-    int64 productCategoryId=4;
-    string productCoverImg=5;
-    string productCarousel=6;
-    double originalPrice=7;
-    double sellingPrice=8;
-    int32 stockNum=9;
-    string tag=10;
-    int32 productSellStatus=11;
-    int64 createUser=12;
-    int64 updateUser=13;
-    string productDetailContent=14;
-    string created_at = 15;
-    string updated_at = 16;
+    int64 id=1;
+    string product_id=2;
+    string product_name=3;
+    string product_intro=4;
+    int64 product_category_id=5;
+    string product_cover_img=6;
+    string product_carousel=7;
+    double original_price=8;
+    double selling_price=9;
+    int32 stock_num=10;
+    string tag=11;
+    int32 product_sell_status=12;
+    int64 create_user=13;
+    int64 update_user=14;
+    string product_detail_content=15;
+    string created_at = 16;
+    string updated_at = 17;
 }
 
 message ListQuery {
@@ -53,5 +55,5 @@ message Response {
     bool valid = 1;
     int64 total = 2;
     Product product = 3;
-    repeated Product products = 4;
+    repeated Product product_list = 4;
 }
